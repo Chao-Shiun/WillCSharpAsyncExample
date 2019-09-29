@@ -45,13 +45,16 @@ namespace D008.利用TAP工作建立大量並行工作練習
                     Console.WriteLine($"{index}-2 測試 (TID: {tid}) <<<< {DateTime.Now}");
                 }));
             }
-            
 
-            while (taskList.Count > 0)
+            Task taskResult = Task.WhenAll(taskList);
+
+            //這方式是在展示可以在完成前做一些你想做的事
+            while (!taskResult.IsCompleted)
             {
-                var finishedResult = await Task.WhenAny(taskList);
-                taskList.Remove(finishedResult);
+                Console.WriteLine("*");
+                await Task.Delay(1000);
             }
+
             sw.Stop();
             Console.WriteLine($"total {sw.ElapsedMilliseconds / 1000.0} secnods");
 
