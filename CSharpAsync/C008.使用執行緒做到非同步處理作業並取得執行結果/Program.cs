@@ -21,7 +21,7 @@ namespace C008.使用執行緒做到非同步處理作業並取得執行結果
                 Console.WriteLine($"執行緒 1 的 ID={Thread.CurrentThread.ManagedThreadId}");
                 for (int i = 0; i < 2000000; i++)
                 {
-                    lock (lockObj)
+                    lock (lockObj)//這段註解的話shareData的結果就不能保證每次一樣
                     {
                         shareData += 1;
                     }
@@ -53,7 +53,7 @@ namespace C008.使用執行緒做到非同步處理作業並取得執行結果
             Console.WriteLine($"執行緒 執行結果為 {shareData}");
 
             //Console.WriteLine("Press any key to continue...");
-            //Console.ReadKey();
+            Console.ReadKey();
         }
     }
 }
